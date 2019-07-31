@@ -7,12 +7,13 @@
 </template>
 
 <script>
-import { loadModules } from 'esri-loader'
+import { loadModules, loadCss } from 'esri-loader'
 export default {
   layout: 'dashboard',
   mounted() {
     loadModules(['esri/Map', 'esri/views/MapView']).then(
       ([Map, MapView, Search, Expand, BasemapGallery]) => {
+        loadCss()
         // create map with the given options at a DOM node w/ id 'mapNode'
         const map = new Map({
           basemap: 'streets'
@@ -31,7 +32,6 @@ export default {
 </script>
 
 <style>
-@import url('https://js.arcgis.com/4.12/esri/css/main.css');
 .mapouter {
   text-align: right;
   height: 100%;
