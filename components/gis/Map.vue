@@ -74,6 +74,7 @@ export default {
             spatialReference: 102736
           })
           map.add(mapLayer)
+          // ***  Start Toolbar *** Makes the Toolbar floating over the map
           view.when(function() {
             const info = new Vue({
               el: '#info',
@@ -82,7 +83,7 @@ export default {
               }
             })
             view.ui.add(info.$el, 'top-right')
-          })
+          }) // ***  End Toolbar ***
         } // END Map
       )
       .catch(err => {
