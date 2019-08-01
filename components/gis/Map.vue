@@ -8,25 +8,58 @@
 
 <script>
 import { loadModules, loadCss } from 'esri-loader'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   layout: 'dashboard',
+  computed: {
+    ...mapState({
+      gisLayers: state => state.gis.defaultLayers
+    }),
+    ...mapGetters({
+      defaultExtent: 'gis/defaultExtent'
+    })
+  },
   mounted() {
-    loadModules(['esri/Map', 'esri/views/MapView']).then(
-      ([Map, MapView, Search, Expand, BasemapGallery]) => {
+    loadModules([
+      'esri/Map',
+      'esri/views/MapView',
+      'esri/WebMap',
+      'esri/layers/TileLayer',
+      'esri/layers/FeatureLayer'
+    ]).then(
+      ([Map, MapView, WebMap, TileLayer, FeatureLayer]) => {
         loadCss()
-        // create map with the given options at a DOM node w/ id 'mapNode'
-        const map = new Map({
-          basemap: 'streets'
-        })
+        const self = this
+        const defaultExtent = self.defaultExtent
+        const map = new Map({})
         // eslint-disable-next-line no-unused-vars
         const view = new MapView({
           container: 'viewDiv', // Reference to the scene div created in step 5
           map: map, // Reference to the map object created before the scene
-          zoom: 4, // Sets zoom level based on level of detail (LOD)
-          center: [15, 65] // Sets center point of view using longitude,latitude
+          zoom: defaultExtent.zoom, // Sets zoom level based on level of detail (LOD)
+          center: defaultExtent.center, // Sets center point of view using longitude,latitude
+          extent: {
+            xmin: defaultExtent.xmin,
+            ymin: defaultExtent.ymin,
+            xmax: defaultExtent.xmax,
+            ymax: defaultExtent.ymax,
+            spatialReference: defaultExtent.spatialReference
+          }
         })
-      }
+        const mapLayer = new TileLayer({
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Basemaps_2274/MapServer',
+          // This property can be used to uniquely identify the layer
+          id: 'Streets',
+          visible: true,
+          spatialReference: 102736
+        })
+        map.add(mapLayer)
+      } // END Map
     )
+  },
+  methods: {
+    ...mapMutations({})
   }
 }
 </script>
