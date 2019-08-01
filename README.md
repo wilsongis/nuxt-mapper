@@ -2,7 +2,13 @@
 
 > An ArcGIS API for JavaScript 4 and Nuxt Project
 
-## Build Setup
+## Build Setup with Docker
+
+``` bash
+$ sh run.sh
+```
+
+## Build Setup w\o Docker
 
 ``` bash
 # install dependencies
