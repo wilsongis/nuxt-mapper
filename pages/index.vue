@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <!-- Provides the application the proper gutter -->
+      <Toolbar />
       <v-container fluid><Map /> </v-container>
     </v-content>
   </v-app>
@@ -9,10 +9,13 @@
 
 <script>
 import Map from '~/components/gis/Map.vue'
+import Toolbar from '~/components/tools/Toolbar.vue'
 export default {
   title: 'CMC Map Viewer',
+  layout: 'default',
   components: {
-    Map
+    Map,
+    Toolbar
   }
 }
 </script>

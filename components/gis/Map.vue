@@ -12,12 +12,7 @@
 <script>
 import { loadModules, loadCss } from 'esri-loader'
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import Toolbar from '~/components/tools/Toolbar.vue'
 export default {
-  layout: 'dashboard',
-  components: {
-    Toolbar
-  },
   computed: {
     ...mapState({
       gisLayers: state => state.gis.defaultLayers
@@ -27,26 +22,15 @@ export default {
     })
   },
   mounted() {
-    window.dojoConfig = {
-      packages: [
-        {
-          name: 'vue',
-          location: 'https://unpkg.com/vue/dist/',
-          main: 'vue'
-        }
-      ]
-    }
     loadModules([
       'esri/Map',
       'esri/views/MapView',
       'esri/WebMap',
       'esri/layers/TileLayer',
-      'esri/layers/FeatureLayer',
-      'esri/core/watchUtils',
-      'vue'
+      'esri/layers/FeatureLayer'
     ])
       .then(
-        ([Map, MapView, WebMap, TileLayer, FeatureLayer, watchUtils, Vue]) => {
+        ([Map, MapView, WebMap, TileLayer, FeatureLayer]) => {
           loadCss()
           const self = this
           const defaultExtent = self.defaultExtent
@@ -74,16 +58,6 @@ export default {
             spatialReference: 102736
           })
           map.add(mapLayer)
-          // ***  Start Toolbar *** Makes the Toolbar floating over the map
-          view.when(function() {
-            const info = new Vue({
-              el: '#info',
-              data: {
-                toolbar: view.toolbar
-              }
-            })
-            view.ui.add(info.$el, 'top-right')
-          }) // ***  End Toolbar ***
         } // END Map
       )
       .catch(err => {
