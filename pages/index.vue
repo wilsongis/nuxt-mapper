@@ -1,7 +1,6 @@
 <template>
-  <v-app>
+  <v-app id="inspire">
     <v-content>
-      <Toolbar />
       <v-container fluid><Map /> </v-container>
     </v-content>
   </v-app>
@@ -9,15 +8,29 @@
 
 <script>
 import Map from '~/components/gis/Map.vue'
-import Toolbar from '~/components/tools/Toolbar.vue'
 export default {
   title: 'CMC Map Viewer',
   layout: 'default',
+
   components: {
-    Map,
-    Toolbar
-  }
+    Map
+  },
+  props: {
+    source: String
+  },
+  data: () => ({
+    drawer: false,
+    drawerRight: false,
+    right: false,
+    left: false
+  })
 }
 </script>
-
-<style></style>
+<style>
+.container {
+  padding-top: 0px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  padding-left: 0px;
+}
+</style>

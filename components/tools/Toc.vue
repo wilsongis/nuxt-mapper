@@ -1,7 +1,7 @@
 <template>
   <div id="toc-panel">
     <div class="text-center">
-      <v-tooltip left>
+      <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn color="primary" dark v-on="on">Left</v-btn>
         </template>
