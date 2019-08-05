@@ -16,6 +16,7 @@ export default {
     Map
   },
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     source: String
   },
   data: () => ({
