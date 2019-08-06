@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 import pkg from './package'
+process.env.DEBUG = 'nuxt:*'
 
 export default {
   mode: 'spa',
@@ -73,6 +74,9 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
