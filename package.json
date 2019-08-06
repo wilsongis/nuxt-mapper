@@ -13,12 +13,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@mdi/font": "^3.8.95",
     "@nuxtjs/axios": "^5.5.4",
     "@nuxtjs/pwa": "^3.0.0-beta.16",
     "@nuxtjs/vuetify": "^1.1.0",
     "cross-env": "^5.2.0",
     "esri-loader": "^2.10.0",
-    "nuxt": "^2.8.1"
+    "nuxt": "^2.8.1",
+    "vue-bootstrap-typeahead": "^0.2.6"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",

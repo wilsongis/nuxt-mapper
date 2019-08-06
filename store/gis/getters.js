@@ -23,5 +23,8 @@ export default {
   },
   getSelectedTool(state) {
     return state.selectedTool
+  },
+  getParcelPopup(state) {
+    return state.parcelPopup
   }
 }

@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 import pkg from './package'
+process.env.DEBUG = 'nuxt:*'
 
 export default {
   mode: 'spa',
@@ -37,7 +38,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/vuetify'],
 
   /*
    ** Nuxt.js modules
@@ -54,10 +55,7 @@ export default {
     theme: {
       dark: true,
       themes: {
-        dark: {
-          primary: colors.red,
-          michou: colors.blue
-        }
+        dark: {}
       }
     }
   },
@@ -76,6 +74,9 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
