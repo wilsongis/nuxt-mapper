@@ -97,24 +97,22 @@ export default {
         )
         .then(res => {
           searchCapture = res.data.features
-          // eslint-disable-next-line no-console
-          console.log(searchCapture)
           let x = 0
           for (x = 0; x < searchCapture.length; x++) {
             const singleArray = {
               id: searchCapture[x].attributes.objectid,
-              name: searchCapture[x].attributes.owner
+              name: searchCapture[x].attributes.owner,
+              layername: 'Parcels'
             }
             searchResults.push(singleArray)
           }
           this.features = searchResults
-          // eslint-disable-next-line no-console
-          console.log(this.features)
         })
     }, // End Query
     selectedFeature() {
-      this.displayFeature = `OWNER: ${this.selectedFeature.attributes.owner}\nMAP: ${this.selectedFeature.attributes.gislink}\nADDRESS: ${this.selectedFeature.attributes.propertyad}`
-      this.loading = false
+      const objectId = this.selectedFeature.id
+      const layerName = this.selectedFeature.layername
+      this.$store.commit('gis/setZoomFeature', [layerName, objectId])
     }
   },
   methods: {

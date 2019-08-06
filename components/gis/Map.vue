@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="mapouter">
-      <div id="info" class="esri-widget">
-        <toolbar :toolbar="toolbar"></toolbar>
-      </div>
+      <div id="info" class="esri-widget"></div>
       <div id="viewDiv"></div>
     </div>
   </div>
@@ -18,7 +16,9 @@ export default {
       gisLayers: state => state.gis.defaultLayers
     }),
     ...mapGetters({
-      defaultExtent: 'gis/defaultExtent'
+      defaultExtent: 'gis/defaultExtent',
+      parcelPopup: 'gis/getParcelPopup',
+      defaultLayers: 'gis/getDefaultLayers'
     })
   },
   mounted() {
@@ -27,13 +27,18 @@ export default {
       'esri/views/MapView',
       'esri/WebMap',
       'esri/layers/TileLayer',
-      'esri/layers/FeatureLayer'
+      'esri/layers/FeatureLayer',
+      'esri/layers/GraphicsLayer'
     ])
       .then(
-        ([Map, MapView, WebMap, TileLayer, FeatureLayer]) => {
+        ([Map, MapView, WebMap, TileLayer, FeatureLayer, GraphicsLayer]) => {
           loadCss()
           const self = this
+          let head
+          let layer
+          const sketchLayer = new GraphicsLayer()
           const defaultExtent = self.defaultExtent
+          const parcelPopup = this.parcelPopup
           const map = new Map({})
           // eslint-disable-next-line no-unused-vars
           const view = new MapView({
@@ -49,15 +54,116 @@ export default {
               spatialReference: defaultExtent.spatialReference
             }
           })
-          const mapLayer = new TileLayer({
-            url:
-              'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Basemaps_2274/MapServer',
-            // This property can be used to uniquely identify the layer
-            id: 'Streets',
-            visible: true,
-            spatialReference: 102736
-          })
-          map.add(mapLayer)
+
+          // MAP FUNCTIONS
+          // Popup Builder
+          const getPopup = function(layerName) {
+            switch (layerName) {
+              case 'Parcels':
+                return parcelPopup
+              default:
+                return null
+            }
+          } // End of Popup Builder
+          // Layer Loading Function
+          const buildLayerList = function(workingLayers) {
+            const mapList = []
+            let mapLayer
+            mapList.push(sketchLayer)
+            for (head = 0; head < 8; head++) {
+              for (
+                layer = 0;
+                layer < workingLayers[head].layers.length;
+                layer++
+              ) {
+                if (workingLayers[head].heading === 'Base Maps') {
+                  mapLayer = new TileLayer({
+                    url: workingLayers[head].layers[layer].url,
+                    // This property can be used to uniquely identify the layer
+                    id: workingLayers[head].layers[layer].name,
+                    visible: workingLayers[head].layers[layer].visible,
+                    spatialReference: 102736
+                  })
+                } else {
+                  const template = getPopup(
+                    workingLayers[head].layers[layer].name
+                  )
+
+                  mapLayer = new FeatureLayer({
+                    url:
+                      'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/' +
+                      workingLayers[head].layers[layer].id,
+                    // This property can be used to uniquely identify the layer
+                    id: workingLayers[head].layers[layer].name,
+                    visible: workingLayers[head].layers[layer].visible,
+                    spatialReference: 102736,
+                    popupTemplate: template
+                  })
+                }
+                mapList.push(mapLayer)
+              }
+            }
+            // First Layer into list is at bottom. mapList needs to be reversed
+            map.layers.addMany(mapList.reverse())
+            return mapList
+          } // End BuildLayerList
+
+          // eslint-disable-next-line no-console
+          console.log(this.defaultLayers)
+          // Call Layer Loading on initial startup
+          const mapLayers = buildLayerList(this.defaultLayers)
+
+          const zoom2Feature = function(layerInfo) {
+            // eslint-disable-next-line no-unused-vars
+            let i, layerUrl
+            let searchLayer = null
+            const layerId = layerInfo[0]
+            const objectId = layerInfo[1]
+            for (i = 0; i < mapLayers.length; i++) {
+              if (mapLayers[i].id === layerId) {
+                searchLayer = mapLayers[i]
+                layerUrl = mapLayers[i].url + '/' + mapLayers[i].layerId
+              }
+            }
+            let highlight
+            view.whenLayerView(searchLayer).then(function(layerView) {
+              const query = searchLayer.createQuery()
+              query.where = `objectid=${objectId}`
+              searchLayer.queryFeatures(query).then(function(result) {
+                if (highlight) {
+                  highlight.remove()
+                }
+                highlight = layerView.highlight(result.features)
+                const infoExtent = result.features[0].geometry.extent
+                  .clone()
+                  .expand(0.5)
+                view.goTo(infoExtent)
+              })
+            })
+          } // End zoom2Feature
+
+          // Function to toggle map layers on/off
+          const toggleLayer = function(layerName) {
+            let i
+            for (i = 0; i < mapLayers.length; i++) {
+              if (mapLayers[i].id === layerName) {
+                mapLayers[i].visible = !mapLayers[i].visible
+              }
+            }
+          } // End toggleLayer
+          // Used to Handle State Changes (ie Layer is toggled on/off)
+          this.$store.subscribe((mutation, state) => {
+            // this.$consoleLog(mutation.type)
+            switch (mutation.type) {
+              case 'gis/setLayerToggle':
+                toggleLayer(mutation.payload)
+                break
+              case 'gis/setZoomFeature':
+                zoom2Feature(mutation.payload)
+                break
+            }
+          }) // End of Subscribe
+          // End Map Functions
         } // END Map
       )
       .catch(err => {

@@ -424,5 +424,83 @@ export default () => ({
         }
       ]
     }
-  ]
+  ],
+  parcelPopup: {
+    // autocasts as new PopupTemplate()
+    title: 'Parcel Attributes:',
+    content: [
+      {
+        // It is also possible to set the fieldInfos outside of the content
+        // directly in the popupTemplate. If no fieldInfos is specifically set
+        // in the content, it defaults to whatever may be set within the popupTemplate.
+        type: 'fields',
+        fieldInfos: [
+          {
+            fieldName: 'owner',
+            label: 'Owner Name'
+          },
+          {
+            fieldName: 'owner2',
+            label: 'Owner2 Name'
+          },
+          {
+            fieldName: 'propertyad',
+            label: 'Property Address'
+          },
+          {
+            fieldName: 'proptype',
+            label: 'Property Type'
+          },
+          {
+            fieldName: 'salesdate',
+            label: 'Sale Date'
+          },
+          {
+            fieldName: 'salesprice',
+            label: 'Sale Price',
+            format: {
+              digitSeparator: true,
+              places: 0
+            }
+          },
+          {
+            fieldName: 'cmap',
+            label: 'Map'
+          },
+          {
+            fieldName: 'gp',
+            label: 'Group'
+          },
+          {
+            fieldName: 'parcel',
+            label: 'Parcel Number'
+          }
+        ]
+      },
+      {
+        // Autocasts as new MediaContent()
+        type: 'media',
+        mediaInfos: [
+          {
+            title: '<b>Property Image</b>',
+            type: 'image', // Autocasts as new ImageMediaInfo()
+            caption: 'Property Image',
+            // Autocasts as new ImageMediaInfoValue()
+            value: {
+              sourceURL: '{imgpath}'
+            }
+          },
+          {
+            title: '<b>Property Sketch</b>',
+            type: 'image', // Autocasts as new ImageMediaInfo()
+            caption: 'Sketch',
+            // Autocasts as new ImageMediaInfoValue()
+            value: {
+              sourceURL: '{sketchpath}'
+            }
+          }
+        ]
+      }
+    ]
+  } // End Parcel Popup
 })
