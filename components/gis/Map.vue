@@ -28,10 +28,19 @@ export default {
       'esri/WebMap',
       'esri/layers/TileLayer',
       'esri/layers/FeatureLayer',
-      'esri/layers/GraphicsLayer'
+      'esri/layers/GraphicsLayer',
+      'esri/renderers/smartMapping/creators/opacity'
     ])
       .then(
-        ([Map, MapView, WebMap, TileLayer, FeatureLayer, GraphicsLayer]) => {
+        ([
+          Map,
+          MapView,
+          WebMap,
+          TileLayer,
+          FeatureLayer,
+          GraphicsLayer,
+          opacityVariableCreator
+        ]) => {
           loadCss()
           const self = this
           let head
@@ -141,6 +150,33 @@ export default {
             })
           } // End zoom2Feature
 
+          const layerTransparency = function(layerInfo) {
+            // eslint-disable-next-line no-unused-vars
+            const layerName = layerInfo[0]
+            const transparency = layerInfo[1]
+            let i, layer
+            for (i = 0; i < mapLayers.length; i++) {
+              if (mapLayers[i].id === layerName) {
+                layer = mapLayers[i]
+              }
+            }
+
+            const params = {
+              layer: layer,
+              valueExpression: transparency,
+              view: view
+            }
+
+            // when the promise resolves, apply the visual variable to the renderer
+            opacityVariableCreator
+              .createVisualVariable(params)
+              .then(function(response) {
+                const renderer = layer.renderer.clone()
+                renderer.visualVariables = [response.visualVariable]
+                layer.renderer = renderer
+              })
+          } // End layerTransparency
+
           // Function to toggle map layers on/off
           const toggleLayer = function(layerName) {
             let i
@@ -159,6 +195,9 @@ export default {
                 break
               case 'gis/setZoomFeature':
                 zoom2Feature(mutation.payload)
+                break
+              case 'gis/setLayerTransparency':
+                layerTransparency(mutation.payload)
                 break
             }
           }) // End of Subscribe

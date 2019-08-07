@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer v-model="drawerRight" app clipped right width="350">
-    <v-list>
+    <v-list flat>
       <v-list-group
         v-for="(heading, head) in defaultLayers"
         :key="defaultLayers[head].heading"
@@ -13,22 +13,36 @@
             ></v-list-item-title>
           </v-list-item-content>
         </template>
-        <v-list-item-group v-model="settings" multiple>
+
+        <v-list-item-group v-model="settings">
           <v-list-item
             v-for="(layers, layer) in defaultLayers[head].layers"
             :key="defaultLayers[head].layers[layer].name"
-            @click="layerClick"
+            four-line
           >
-            <v-switch
-              :key="defaultLayers[head].layers[layer].name"
-              color="primary"
-              :label="defaultLayers[head].layers[layer].name"
-              :value="true"
-              :input-value="defaultLayers[head].layers[layer].visible"
-              @change="toggle(head, layer, $event !== null, $event)"
-            ></v-switch>
+            <v-list-item-content>
+              <v-card outlined>
+                <v-switch
+                  :key="defaultLayers[head].layers[layer].name"
+                  :v-model="`switch-${layer}`"
+                  color="primary"
+                  :label="defaultLayers[head].layers[layer].name"
+                  :value="true"
+                  :input-value="defaultLayers[head].layers[layer].visible"
+                  @change="toggle(head, layer, $event !== null, $event)"
+                ></v-switch>
 
-            <v-list-item-content> </v-list-item-content>
+                <v-slider
+                  :v-model="`slide-${layer}`"
+                  thumb-label
+                  append-icon="layers"
+                  prepend-icon="mdi-layers-outline"
+                  :max="max"
+                  :min="min"
+                  @change="transparency(head, layer, $event !== null, $event)"
+                ></v-slider>
+              </v-card>
+            </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
       </v-list-group>
@@ -48,7 +62,9 @@ export default {
       0: false,
       1: false,
       2: false
-    }
+    },
+    max: 100,
+    min: 0
   }),
   computed: {
     ...mapGetters({
@@ -64,12 +80,15 @@ export default {
       setDrawerRight: 'app/setDrawerRight'
     }),
     toggle(head, layer, value, event) {
-      // debugger
       this.$store.commit('gis/setLayerVisible', { head, layer, value })
       this.$store.commit(
         'gis/setLayerToggle',
         this.defaultLayers[head].layers[layer].name
       )
+    },
+    transparency(head, layer, value, event) {
+      const layerName = this.defaultLayers[head].layers[layer].name
+      this.$store.commit('gis/setLayerTransparency', [layerName, event])
     },
     ...mapMutations({}),
     // Create an array the length of our items

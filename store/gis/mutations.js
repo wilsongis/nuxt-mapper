@@ -2,6 +2,9 @@ export default {
   setLayerVisible(state, value) {
     state.defaultLayers[value.head].layers[value.layer].visible = value.value
   },
+  setLayerTransparency(state, value) {
+    state.layerTransparency = value
+  },
   setLayersList(state, value) {
     state.layersList = value
   },
