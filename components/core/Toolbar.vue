@@ -93,7 +93,7 @@ export default {
       const strSearch = '%25' + newQuery.toUpperCase() + '%25'
       axios
         .get(
-          `http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/37/query?where=owner+like+%27${strSearch}%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=objectid%2Cid%2Cgislink%2Cowner%2Cowner2%2Cpropertyad&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=owner&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=10&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=json`
+          `http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/query?where=owner+like+%27${strSearch}%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=objectid%2Cid%2Cgislink%2Cowner%2Cowner2%2Cpropertyad&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=owner&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=10&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=json`
         )
         .then(res => {
           searchCapture = res.data.features
