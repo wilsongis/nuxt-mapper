@@ -1,6 +1,7 @@
 export default () => ({
   drawer: null,
   color: 'info',
+  layerTransparency: 0,
   defaultExtent: {
     container: 'viewDiv', // Reference to the scene div
     zoom: 11, // Sets zoom level based on level of detail (LOD)
