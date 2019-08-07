@@ -36,6 +36,7 @@ export default {
           const self = this
           let head
           let layer
+          let highlight
           const sketchLayer = new GraphicsLayer()
           const defaultExtent = self.defaultExtent
           const parcelPopup = this.parcelPopup
@@ -91,7 +92,7 @@ export default {
 
                   mapLayer = new FeatureLayer({
                     url:
-                      'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/' +
+                      'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/' +
                       workingLayers[head].layers[layer].id,
                     // This property can be used to uniquely identify the layer
                     id: workingLayers[head].layers[layer].name,
@@ -108,8 +109,6 @@ export default {
             return mapList
           } // End BuildLayerList
 
-          // eslint-disable-next-line no-console
-          console.log(this.defaultLayers)
           // Call Layer Loading on initial startup
           const mapLayers = buildLayerList(this.defaultLayers)
 
@@ -125,7 +124,7 @@ export default {
                 layerUrl = mapLayers[i].url + '/' + mapLayers[i].layerId
               }
             }
-            let highlight
+
             view.whenLayerView(searchLayer).then(function(layerView) {
               const query = searchLayer.createQuery()
               query.where = `objectid=${objectId}`
@@ -136,7 +135,7 @@ export default {
                 highlight = layerView.highlight(result.features)
                 const infoExtent = result.features[0].geometry.extent
                   .clone()
-                  .expand(0.5)
+                  .expand(0.25)
                 view.goTo(infoExtent)
               })
             })

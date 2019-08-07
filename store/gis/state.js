@@ -21,7 +21,7 @@ export default () => ({
       searchName: 'owner',
       layerName: 'Parcels',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/37/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
       displayFields: ['owner', 'owner2', 'propertyad', 'gislink'],
       outFields: ['*'],
       orderByFields: ['owner'],
@@ -34,7 +34,7 @@ export default () => ({
       searchName: 'propertyad',
       layerName: 'Parcels',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/37/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
       displayFields: ['propertyad', 'owner', 'owner2', 'gislink'],
       outFields: ['*'],
       orderByFields: ['propertyad'],
@@ -47,7 +47,7 @@ export default () => ({
       searchName: 'label',
       layerName: 'Streets',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/31/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/31/',
       displayFields: ['label', 'name', 'alt_name', 'type'],
       outFields: ['*'],
       orderByFields: ['label'],
@@ -62,7 +62,7 @@ export default () => ({
       nearmeName: 'owner',
       layerName: 'Parcels',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/37/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
       displayFields: ['owner', 'owner2', 'propertyad', 'gislink'],
       outFields: ['*'],
       orderByFields: ['owner'],
@@ -75,7 +75,7 @@ export default () => ({
       nearmeName: 'propertyad',
       layerName: 'Parcels',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/37/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
       displayFields: ['propertyad', 'owner', 'owner2', 'gislink'],
       outFields: ['*'],
       orderByFields: ['propertyad'],
@@ -88,7 +88,7 @@ export default () => ({
       nearmeName: 'label',
       layerName: 'Streets',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/31/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/31/',
       displayFields: ['label', 'name', 'alt_name', 'type'],
       outFields: ['*'],
       orderByFields: ['label'],
@@ -163,7 +163,7 @@ export default () => ({
           id: 37,
           visible: true,
           url:
-            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers_2274/MapServer/37/'
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/'
         },
         {
           name: 'Subdivision',
