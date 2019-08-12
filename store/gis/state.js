@@ -249,7 +249,7 @@ export default () => ({
         {
           name: 'Major Roads',
           id: 28,
-          visible: true
+          visible: false
         },
         {
           name: 'Interstate Mile Markers',
@@ -259,12 +259,12 @@ export default () => ({
         {
           name: 'Major Streets',
           id: 30,
-          visible: true
+          visible: false
         },
         {
           name: 'Streets',
           id: 31,
-          visible: true
+          visible: false
         },
         {
           name: 'Intersections',
@@ -411,7 +411,7 @@ export default () => ({
         },
         {
           id: 'f883bd9713e44104ac750665fd9a5b34',
-          name: 'Streets',
+          name: 'CMC Base',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Basemaps_2274/MapServer',
           visible: true

@@ -6,9 +6,20 @@
     color="blue darken-3"
     dark
   >
-    <v-btn class="default v-btn--simple" dark icon @click.stop="onClickLeft">
-      <v-icon>mdi-view-list</v-icon>
-    </v-btn>
+    <v-tooltip left>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="default v-btn--simple"
+          dark
+          icon
+          @click.stop="onClickLeft"
+        >
+          <v-icon>mdi-crosshairs-gps</v-icon>
+        </v-btn>
+      </template>
+      <span>Near Me</span>
+    </v-tooltip>
+
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
       <span class="hidden-sm-and-down">Toolbar</span>
     </v-toolbar-title>
@@ -39,9 +50,19 @@
     </vue-bootstrap-typeahead>
 
     <v-spacer></v-spacer>
-    <v-btn class="default v-btn--simple" dark icon @click.stop="onClickRight">
-      <v-icon>mdi-layers-outline</v-icon>
-    </v-btn>
+    <v-tooltip right>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="default v-btn--simple"
+          dark
+          icon
+          @click.stop="onClickRight"
+        >
+          <v-icon>mdi-layers-outline</v-icon>
+        </v-btn>
+      </template>
+      <span>Table of Contents</span>
+    </v-tooltip>
   </v-app-bar>
 </template>
 <script>
@@ -136,14 +157,14 @@ export default {
 <style>
 #fieldSelect {
   padding-top: 0px;
-  padding-right: 3px;
+  padding-right: 10px;
   padding-bottom: 0px;
   padding-left: 0px;
   max-width: 195px;
 }
 .form-control {
   width: 450px;
-  height: 50px;
+  height: 60px;
   border-color: white;
   background-color: white;
   color: black;
