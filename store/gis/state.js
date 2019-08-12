@@ -107,36 +107,50 @@ export default () => ({
         {
           id: 16,
           name: 'Landfill',
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           id: 17,
           name: 'State Offices',
+          icon: 'control_point',
+          transparency: false,
           visible: false
         },
         {
           id: 18,
           name: 'Places of Worship',
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           id: 19,
           name: 'City Offices',
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           id: 20,
           name: 'County Offices',
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           id: 21,
           name: 'Library',
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           id: 22,
           name: 'Post Offices',
+          transparency: false,
+          icon: 'control_point',
           visible: false
         }
       ]
@@ -147,21 +161,29 @@ export default () => ({
         {
           name: 'Mobile Home Parks',
           id: 34,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Address Points',
           id: 35,
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           name: 'Vacant Land',
           id: 36,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Parcels',
           id: 37,
+          transparency: true,
+          icon: 'border_all',
           visible: true,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/'
@@ -169,21 +191,29 @@ export default () => ({
         {
           name: 'Subdivision',
           id: 38,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'ROW',
           id: 39,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Index',
           id: 40,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Index400',
           id: 41,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         }
       ]
@@ -194,41 +224,56 @@ export default () => ({
         {
           name: 'Major Rivers',
           id: 51,
+          transparency: false,
+          icon: 'timeline',
           visible: false
         },
         {
           name: 'Rivers',
           id: 52,
+          icon: 'timeline',
           visible: false
         },
         {
           name: 'Water Bodies',
           id: 53,
+          transparency: true,
+          icon: 'border_all',
           visible: true
         },
         {
           name: 'River Mile Markers',
           id: 54,
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           name: 'Forest',
           id: 55,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Soils',
           id: 56,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Wetlands',
           id: 57,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'FEMA Flood',
           id: 46,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         }
       ]
@@ -239,36 +284,50 @@ export default () => ({
         {
           name: 'Sidewalks',
           id: 26,
+          transparency: false,
+          icon: 'timeline',
           visible: false
         },
         {
           name: 'Railroad',
           id: 27,
+          transparency: false,
+          icon: 'timeline',
           visible: true
         },
         {
           name: 'Major Roads',
           id: 28,
+          transparency: false,
+          icon: 'timeline',
           visible: false
         },
         {
           name: 'Interstate Mile Markers',
           id: 29,
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           name: 'Major Streets',
           id: 30,
+          transparency: false,
+          icon: 'timeline',
           visible: false
         },
         {
           name: 'Streets',
           id: 31,
+          transparency: false,
+          icon: 'timeline',
           visible: false
         },
         {
           name: 'Intersections',
           id: 31,
+          transparency: false,
+          icon: 'control_point',
           visible: false
         }
       ]
@@ -279,36 +338,50 @@ export default () => ({
         {
           name: 'Polling Places',
           id: 66,
+          transparency: false,
+          icon: 'control_point',
           visible: false
         },
         {
           name: 'City Wards',
           id: 73,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'County Districts',
           id: 68,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'School District',
           id: 70,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'State House District',
           id: 71,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'State Senate District',
           id: 72,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Congressional District',
           id: 67,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         }
       ]
@@ -319,21 +392,29 @@ export default () => ({
         {
           name: 'Schools',
           id: 75,
+          transparency: false,
+          icon: 'control_point',
           visible: true
         },
         {
           name: 'Colleges',
           id: 76,
+          transparency: false,
+          icon: 'control_point',
           visible: true
         },
         {
           name: 'Elementary School Boundary',
           id: 77,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Middle and High School Boundary',
           id: 78,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         }
       ]
@@ -344,36 +425,50 @@ export default () => ({
         {
           name: 'Zoning',
           id: 82,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Two Rivers Districts',
           id: 95,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Clarksville Boundary',
           id: 96,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'CDBG Neighborhood',
           id: 97,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Ft Campbell Boundary',
           id: 98,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'Zip Codes',
           id: 99,
+          transparency: true,
+          icon: 'border_all',
           visible: false
         },
         {
           name: 'County Boundary',
           id: 100,
+          transparency: true,
+          icon: 'border_all',
           visible: true
         }
       ]
@@ -384,6 +479,7 @@ export default () => ({
         {
           id: '6269388be2b34e989282f09536a602ee',
           name: '2010 Imagery',
+          icon: 'satellite',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/MCGTN/Mont6InAerial_2010/MapServer',
           visible: false
@@ -391,6 +487,7 @@ export default () => ({
         {
           id: 'b7f2dd3475f846598241f4376172e534',
           name: '2012 Imagery',
+          icon: 'satellite',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/MCGTN/Mont6InAerial2012/MapServer',
           visible: false
@@ -398,6 +495,7 @@ export default () => ({
         {
           id: '57ce2ac183ac4ccba8282cd58adb409f',
           name: '2016 Imagery',
+          icon: 'satellite',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/MCGTN/MontAerial2016/MapServer',
           visible: false
@@ -405,6 +503,7 @@ export default () => ({
         {
           id: '26cbc77458254c7fb10e05359e784584',
           name: '2018 Imagery',
+          icon: 'satellite',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/MCGTN/Orthos_2018/MapServer',
           visible: false
@@ -412,6 +511,7 @@ export default () => ({
         {
           id: 'f883bd9713e44104ac750665fd9a5b34',
           name: 'CMC Base',
+          icon: 'satellite',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Basemaps_2274/MapServer',
           visible: true
@@ -419,6 +519,7 @@ export default () => ({
         {
           id: 'f883bd9713e44104ac750665fd9a5b32',
           name: 'TN Imagery',
+          icon: 'satellite',
           url:
             'https://tnmap.tn.gov/arcgis/rest/services/BASEMAPS/IMAGERY/MapServer',
           visible: false

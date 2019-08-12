@@ -20,29 +20,62 @@
             :key="defaultLayers[head].layers[layer].name"
             four-line
           >
+            <v-list-item-icon>
+              <v-icon
+                v-if="
+                  defaultLayers[head].layers[layer].icon === 'control_point'
+                "
+                id="icon"
+                >control_point</v-icon
+              >
+              <v-icon
+                v-else-if="
+                  defaultLayers[head].layers[layer].icon === 'timeline'
+                "
+                id="icon"
+                >timeline</v-icon
+              >
+              <v-icon
+                v-else-if="
+                  defaultLayers[head].layers[layer].icon === 'border_all'
+                "
+                id="icon"
+                >border_all</v-icon
+              >
+              <v-icon
+                v-else-if="
+                  defaultLayers[head].layers[layer].icon === 'satellite'
+                "
+                id="icon"
+                >satellite</v-icon
+              >
+            </v-list-item-icon>
             <v-list-item-content>
-              <v-card outlined>
-                <v-switch
-                  :key="defaultLayers[head].layers[layer].name"
-                  :v-model="`switch-${layer}`"
-                  color="primary"
-                  :label="defaultLayers[head].layers[layer].name"
-                  :value="true"
-                  :input-value="defaultLayers[head].layers[layer].visible"
-                  @change="toggle(head, layer, $event !== null, $event)"
-                ></v-switch>
+              <v-switch
+                :key="defaultLayers[head].layers[layer].name"
+                :v-model="`switch-${layer}`"
+                color="primary"
+                :label="defaultLayers[head].layers[layer].name"
+                :value="true"
+                :input-value="defaultLayers[head].layers[layer].visible"
+                @change="toggle(head, layer, $event !== null, $event)"
+              ></v-switch>
 
-                <v-slider
-                  :v-model="`slide-${layer}`"
-                  thumb-label
-                  append-icon="layers"
-                  prepend-icon="mdi-layers-outline"
-                  :max="max"
-                  :min="min"
-                  @change="transparency(head, layer, $event !== null, $event)"
-                ></v-slider>
-              </v-card>
+              <v-slider
+                v-if="defaultLayers[head].layers[layer].transparency === true"
+                :v-model="`slide-${layer}`"
+                thumb-label
+                append-icon="layers"
+                prepend-icon="mdi-layers-outline"
+                value="100"
+                :max="max"
+                :min="min"
+                @change="transparency(head, layer, $event !== null, $event)"
+              ></v-slider>
             </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-divider></v-divider>
           </v-list-item>
         </v-list-item-group>
       </v-list-group>
@@ -105,4 +138,8 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+#icon {
+  padding-top: 15px;
+}
+</style>
