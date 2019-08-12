@@ -29,7 +29,9 @@ export default {
       'esri/layers/TileLayer',
       'esri/layers/FeatureLayer',
       'esri/layers/GraphicsLayer',
-      'esri/renderers/smartMapping/creators/opacity'
+      'esri/renderers/smartMapping/creators/opacity',
+
+      'esri/Graphic'
     ])
       .then(
         ([
@@ -39,7 +41,8 @@ export default {
           TileLayer,
           FeatureLayer,
           GraphicsLayer,
-          opacityVariableCreator
+          opacityVariableCreator,
+          Graphic
         ]) => {
           loadCss()
           const self = this
@@ -117,6 +120,27 @@ export default {
             map.layers.addMany(mapList.reverse())
             return mapList
           } // End BuildLayerList
+
+          view.on('click', function(event) {
+            // create graphic for mouse point click
+            const pointGraphic = new Graphic({
+              symbol: {
+                type: 'simple-marker', // autocasts as new SimpleMarkerSymbol()
+                color: [0, 0, 139],
+                outline: {
+                  color: [255, 255, 255],
+                  width: 1.5
+                }
+              }
+            })
+            view.graphics.remove(pointGraphic)
+
+            view.graphics.removeAll()
+            const point = view.toMap(event)
+            pointGraphic.geometry = point
+            self.$store.commit('nearme/setNearmePoint', point)
+            view.graphics.add(pointGraphic)
+          })
 
           // Call Layer Loading on initial startup
           const mapLayers = buildLayerList(this.defaultLayers)

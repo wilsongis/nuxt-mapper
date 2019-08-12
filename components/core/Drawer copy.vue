@@ -1,33 +1,90 @@
 <template>
   <v-navigation-drawer v-model="drawer" app clipped>
-    <div id="nearme">
-      <v-expansion-panels focusable>
-        <v-expansion-panel v-for="(item, i) in items" :key="i">
-          <v-expansion-panel-header
-            >{{ item.label }}: {{ item.name }}</v-expansion-panel-header
-          >
-          <v-expansion-panel-content>
-            <v-card class="mx-auto" max-width="225" tile>
-              <v-list-item-content four-line>
-                <v-list-item-content>
-                  <v-list-item-title
-                    >{{ item.nameTitle }}: {{ item.name }}</v-list-item-title
+    <div>
+      <h3>Near Me:</h3>
+      <v-container fluid grid-list-md>
+        <v-data-iterator
+          :items="items"
+          item-key="sorter"
+          :expand="expand"
+          row
+          wrap
+          hide-default-footer
+        >
+          <template v-slot:item="props">
+            <v-card>
+              <v-card-title>
+                <strong>{{ props.item.label }}: </strong>
+                <strong>{{ props.item.name }}</strong>
+              </v-card-title>
+              <v-subheader> {{ props.item.name }}</v-subheader>
+              <v-switch
+                :input-value="isExpanded(props.item)"
+                :label="isExpanded(props.item) ? 'Expanded' : 'Closed'"
+                class="pl-4 mt-0"
+                @change="v => expand(props.item, v)"
+              ></v-switch>
+              <v-divider></v-divider>
+              <v-list v-if="isExpanded(props.item)" dense>
+                <v-list-item>
+                  <v-list-item-content
+                    >{{ props.item.nameTitle }}:</v-list-item-content
                   >
-                  <v-list-item-subtitle>
-                    {{ item.head1 }}: {{ item.data1 }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    {{ item.head2 }}: {{ item.data2 }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    <a :href="item.data3" target="_blank">{{ item.data3 }}</a>
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item-content>
+                  <v-list-item-content class="align-end">{{
+                    props.item.name
+                  }}</v-list-item-content>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-content
+                    >{{ props.item.head1 }}:</v-list-item-content
+                  >
+                  <v-list-item-content class="align-end">{{
+                    props.item.data1
+                  }}</v-list-item-content>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-content
+                    >{{ props.item.head2 }}:</v-list-item-content
+                  >
+                  <v-list-item-content class="align-end">{{
+                    props.item.data2
+                  }}</v-list-item-content>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-content
+                    >{{ props.item.head3 }}:</v-list-item-content
+                  >
+                  <v-list-item-content class="align-end">{{
+                    props.item.data3
+                  }}</v-list-item-content>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-content>ID:</v-list-item-content>
+                  <v-list-item-content class="align-end">{{
+                    props.item.id
+                  }}</v-list-item-content>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-btn
+                      :loading="loading"
+                      :disabled="loading"
+                      color="success"
+                      @click="zooming(props.item.layerName, props.item.id)"
+                    >
+                      Zoom to Selected
+                      <template v-slot:loader>
+                        <span>...</span>
+                      </template>
+                    </v-btn>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
             </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+          </template>
+        </v-data-iterator>
+      </v-container>
     </div>
   </v-navigation-drawer>
 </template>
@@ -80,10 +137,6 @@ export default {
       setDrawer: 'app/setDrawer'
     }),
     ...mapMutations({}),
-    urlCheck(test, name) {
-      // eslint-disable-next-line no-console
-      console.log('Tested')
-    },
     nearmeBuilder() {
       const self = this
       self.resultsArray = []
@@ -129,30 +182,20 @@ export default {
           for (x = 0; x < array.length; x++) {
             const id = array[x].attributes.objectid
             const name = array[x].attributes[layer2Search.displayFields[0]]
-            const head1 = layer2Search.displayFields[1].toUpperCase()
             const data1 = array[x].attributes[layer2Search.displayFields[1]]
-            const head2 = layer2Search.displayFields[2].toUpperCase()
-            const data2 = self.dataAddr(
-              name,
-              head2,
-              array[x].attributes[layer2Search.displayFields[2]]
-            )
-
-            const head3 = layer2Search.displayFields[3].toUpperCase()
-            const data3 = self.dataWeb(
-              array[x].attributes[layer2Search.displayFields[3]]
-            )
+            const data2 = array[x].attributes[layer2Search.displayFields[2]]
+            const data3 = array[x].attributes[layer2Search.displayFields[3]]
             const layerName = layer2Search.layerName
             const searchName = layer2Search.searchName
             const singleArray = {
               id: id,
-              nameTitle: layer2Search.displayFields[0].toUpperCase(),
+              nameTitle: layer2Search.displayFields[0],
               name: name,
-              head1: head1,
+              head1: layer2Search.displayFields[1],
               data1: data1,
-              head2: head2,
+              head2: layer2Search.displayFields[2],
               data2: data2,
-              head3: head3,
+              head3: layer2Search.displayFields[3],
               data3: data3,
               layerName: layerName,
               label: layer2Search.label,
@@ -163,22 +206,7 @@ export default {
         })
       }) // End of Query
     },
-    dataAddr(name, head, data) {
-      let returnData = data
-      if (head === 'ADDRESS') {
-        returnData = 'http://maps.google.com/?q=' + data + ', 37040'
-      }
-      return returnData
-    },
-    dataWeb(data) {
-      let returnData = data
-      if (data.substring(0, 4) === 'http') {
-        returnData = data
-      } else {
-        returnData = ''
-      }
-      return returnData
-    },
+
     zooming(layer, objectid) {
       this.$store.commit('gis/setZoomFeature', [layer, objectid])
     }
