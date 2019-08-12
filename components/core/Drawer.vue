@@ -1,6 +1,9 @@
 <template>
   <v-navigation-drawer v-model="drawer" app clipped>
     <div id="nearme">
+      <h1>Near Me:</h1>
+      <h3>Click on a point on the map.</h3>
+      <v-divider></v-divider>
       <v-expansion-panels focusable>
         <v-expansion-panel v-for="(item, i) in items" :key="i">
           <v-expansion-panel-header
