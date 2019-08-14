@@ -85,50 +85,89 @@ export default {
       displayFeature: null,
       features: [],
       pick: 'Owner',
-      items: ['Owner', 'Property Address', 'Street', 'Subdivision']
+      items: ['Owner', 'Property Address', 'Subdivision', 'Street'],
+      returnValue: {}
     }
   },
   computed: {
     ...mapGetters({
       drawer: 'app/getDrawer',
       drawerRight: 'app/getDrawerRight',
-      zoomFeature: 'gis/getZoomFeature'
+      zoomFeature: 'gis/getZoomFeature',
+      searchInfo: 'gis/getSearchInfo',
+      searchLayers: 'gis/getSearchLayers'
     })
   },
   watch: {
     loader() {
+      const self = this
       const l = this.loader
       this[l] = !this[l]
-      const layerId = 'Parcels'
+      this.$store.commit('gis/setSearchInfo', self.pick)
+      const layerId = self.searchInfo
       const objectId = this.selectedFeature.attributes.objectid
       this.$store.commit('gis/setZoomFeature', [layerId, objectId])
       setTimeout(() => (this[l] = false), 1000)
 
       this.loader = null
     },
+
     // When the query value changes, fetch new results from
     // the API - in practice this action should be debounced
     query(newQuery) {
+      const self = this
+      self.$store.commit('gis/setSearchInfo', self.pick)
+      const layers = self.searchLayers
+      const searchCount = layers.length
       let searchCapture = []
+      let strSearch = ''
       const searchResults = []
-      const strSearch = '%25' + newQuery.toUpperCase() + '%25'
-      axios
-        .get(
-          `http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/query?where=owner+like+%27${strSearch}%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=objectid%2Cid%2Cgislink%2Cowner%2Cowner2%2Cpropertyad&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=owner&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=10&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=json`
-        )
-        .then(res => {
-          searchCapture = res.data.features
-          let x = 0
-          for (x = 0; x < searchCapture.length; x++) {
-            const singleArray = {
-              id: searchCapture[x].attributes.objectid,
-              name: searchCapture[x].attributes.owner,
-              layername: 'Parcels'
-            }
-            searchResults.push(singleArray)
+      let layer2Search = []
+      let i = 0
+      const layerId = self.searchInfo
+      for (i = 0; i < searchCount; i++) {
+        if (layerId[2] === layers[i].searchName) {
+          layer2Search = layers[i]
+        }
+      }
+      if (layer2Search.layerName === 'Streets') {
+        const str = newQuery.toLowerCase().split(' ')
+        for (let i = 0; i < str.length; i++) {
+          str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1)
+        }
+        strSearch =
+          layerId[2] +
+          '+like+' +
+          layer2Search.pre +
+          str.join(' ') +
+          layer2Search.post
+      } else {
+        strSearch =
+          layerId[2] +
+          '+like+' +
+          layer2Search.pre +
+          newQuery.toUpperCase() +
+          layer2Search.post // eslint-disable-next-line no-console
+      }
+      const outFields = layer2Search.outFields
+      const orderByFields = layer2Search.orderByFields
+      const searchName = layer2Search.searchName
+      const url =
+        layer2Search.url +
+        `query?where=${strSearch}&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=${outFields}&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=${orderByFields}&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=10&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=json`
+      axios.get(url).then(res => {
+        searchCapture = res.data.features
+        let x = 0
+        for (x = 0; x < searchCapture.length; x++) {
+          const singleArray = {
+            id: searchCapture[x].attributes.objectid,
+            name: searchCapture[x].attributes[searchName],
+            layername: layerId[1]
           }
-          this.features = searchResults
-        })
+          searchResults.push(singleArray)
+        }
+        this.features = searchResults
+      })
     }, // End Query
     selectedFeature() {
       const objectId = this.selectedFeature.id
@@ -147,9 +186,6 @@ export default {
     },
     onClickRight() {
       this.setDrawerRight(!this.drawerRight)
-    },
-    onClick() {
-      // Do something
     }
   }
 }

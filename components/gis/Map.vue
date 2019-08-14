@@ -18,7 +18,8 @@ export default {
     ...mapGetters({
       defaultExtent: 'gis/defaultExtent',
       parcelPopup: 'gis/getParcelPopup',
-      defaultLayers: 'gis/getDefaultLayers'
+      defaultLayers: 'gis/getDefaultLayers',
+      searchInfo: 'gis/getSearchInfo'
     })
   },
   mounted() {
@@ -83,7 +84,7 @@ export default {
             const mapList = []
             let mapLayer
             mapList.push(sketchLayer)
-            for (head = 0; head < 8; head++) {
+            for (head = 0; head < 9; head++) {
               for (
                 layer = 0;
                 layer < workingLayers[head].layers.length;
@@ -101,11 +102,8 @@ export default {
                   const template = getPopup(
                     workingLayers[head].layers[layer].name
                   )
-
                   mapLayer = new FeatureLayer({
-                    url:
-                      'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/' +
-                      workingLayers[head].layers[layer].id,
+                    url: workingLayers[head].layers[layer].url,
                     // This property can be used to uniquely identify the layer
                     id: workingLayers[head].layers[layer].name,
                     visible: workingLayers[head].layers[layer].visible,
@@ -154,10 +152,9 @@ export default {
             for (i = 0; i < mapLayers.length; i++) {
               if (mapLayers[i].id === layerId) {
                 searchLayer = mapLayers[i]
-                layerUrl = mapLayers[i].url + '/' + mapLayers[i].layerId
+                layerUrl = mapLayers[i].url
               }
             }
-
             view.whenLayerView(searchLayer).then(function(layerView) {
               const query = searchLayer.createQuery()
               query.where = `objectid=${objectId}`
@@ -168,7 +165,7 @@ export default {
                 highlight = layerView.highlight(result.features)
                 const infoExtent = result.features[0].geometry.extent
                   .clone()
-                  .expand(0.25)
+                  .expand(2)
                 view.goTo(infoExtent)
               })
             })
