@@ -16,7 +16,7 @@
     "@mdi/font": "^4.0.96",
     "@nuxtjs/axios": "^5.5.4",
     "@nuxtjs/pwa": "^3.0.0-beta.16",
-    "@nuxtjs/vuetify": "^1.2.1",
+    "@nuxtjs/vuetify": "^1.2.2",
     "cross-env": "^5.2.0",
     "esri-loader": "^2.10.0",
     "nuxt": "^2.8.1",
