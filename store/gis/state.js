@@ -16,46 +16,56 @@ export default () => ({
   layersList: [],
   layerToggle: null,
   zoomFeature: [],
+  searchInfo: [],
   selectedTool: 'Identify',
   searchLayers: [
     {
       searchName: 'owner',
       layerName: 'Parcels',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/5/',
       displayFields: ['owner', 'owner2', 'propertyad', 'gislink'],
-      outFields: ['*'],
-      orderByFields: ['owner'],
-      sort: 0,
-      pre: '',
-      post: '%',
+      outFields: 'objectid, owner, owner2, propertyad, gislink',
+      orderByFields: 'owner',
+      pre: '%27',
+      post: '%25%27',
       num: 10
     },
     {
       searchName: 'propertyad',
       layerName: 'Parcels',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/5/',
       displayFields: ['propertyad', 'owner', 'owner2', 'gislink'],
-      outFields: ['*'],
-      orderByFields: ['propertyad'],
-      sort: 200,
-      pre: '%',
-      post: '%',
-      num: 5
+      outFields: 'objectid, propertyad, owner, owner2, gislink',
+      orderByFields: 'propertyad',
+      pre: '%27%25',
+      post: '%25%27',
+      num: 10
+    },
+    {
+      searchName: 'subdivisio',
+      layerName: 'Parcels',
+      url:
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/5/',
+      displayFields: ['subdivisio', 'owner', 'owner2', 'gislink'],
+      outFields: 'objectid, subdivisio, owner, owner2, gislink',
+      orderByFields: 'subdivisio',
+      pre: '%27%25',
+      post: '%25%27',
+      num: 10
     },
     {
       searchName: 'label',
       layerName: 'Streets',
       url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/31/',
+        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/3/',
       displayFields: ['label', 'name', 'alt_name', 'type'],
-      outFields: ['*'],
-      orderByFields: ['label'],
-      sort: 300,
-      pre: '',
-      post: '%',
-      num: 5
+      outFields: 'objectid, label, name, alt_name, type',
+      orderByFields: 'label',
+      pre: '%27%25',
+      post: '%25%27',
+      num: 10
     }
   ],
   nearmeLayers: [
@@ -67,7 +77,6 @@ export default () => ({
       displayFields: ['owner', 'owner2', 'propertyad', 'gislink'],
       outFields: ['*'],
       orderByFields: ['owner'],
-      sort: 0,
       pre: '',
       post: '%',
       num: 10
@@ -80,7 +89,6 @@ export default () => ({
       displayFields: ['propertyad', 'owner', 'owner2', 'gislink'],
       outFields: ['*'],
       orderByFields: ['propertyad'],
-      sort: 200,
       pre: '%',
       post: '%',
       num: 5
@@ -93,7 +101,6 @@ export default () => ({
       displayFields: ['label', 'name', 'alt_name', 'type'],
       outFields: ['*'],
       orderByFields: ['label'],
-      sort: 300,
       pre: '',
       post: '%',
       num: 5
@@ -109,49 +116,63 @@ export default () => ({
           name: 'Landfill',
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/16'
         },
         {
           id: 17,
           name: 'State Offices',
           icon: 'control_point',
           transparency: false,
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/17'
         },
         {
           id: 18,
           name: 'Places of Worship',
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/18'
         },
         {
           id: 19,
           name: 'City Offices',
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/19'
         },
         {
           id: 20,
           name: 'County Offices',
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/20'
         },
         {
           id: 21,
           name: 'Library',
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/21'
         },
         {
           id: 22,
           name: 'Post Offices',
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/22'
         }
       ]
     },
@@ -163,21 +184,27 @@ export default () => ({
           id: 34,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/34'
         },
         {
           name: 'Address Points',
           id: 35,
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/35'
         },
         {
           name: 'Vacant Land',
           id: 36,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/36'
         },
         {
           name: 'Parcels',
@@ -186,35 +213,43 @@ export default () => ({
           icon: 'border_all',
           visible: true,
           url:
-            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/'
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37'
         },
         {
           name: 'Subdivision',
           id: 38,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/38'
         },
         {
           name: 'ROW',
           id: 39,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/39'
         },
         {
           name: 'Index',
           id: 40,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/40'
         },
         {
           name: 'Index400',
           id: 41,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/41'
         }
       ]
     },
@@ -226,55 +261,71 @@ export default () => ({
           id: 51,
           transparency: false,
           icon: 'timeline',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/51'
         },
         {
           name: 'Rivers',
           id: 52,
           icon: 'timeline',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/52'
         },
         {
           name: 'Water Bodies',
           id: 53,
           transparency: true,
           icon: 'border_all',
-          visible: true
+          visible: true,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/53'
         },
         {
           name: 'River Mile Markers',
           id: 54,
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/54'
         },
         {
           name: 'Forest',
           id: 55,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/55'
         },
         {
           name: 'Soils',
           id: 56,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/56'
         },
         {
           name: 'Wetlands',
           id: 57,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/57'
         },
         {
           name: 'FEMA Flood',
           id: 46,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/46'
         }
       ]
     },
@@ -286,49 +337,63 @@ export default () => ({
           id: 26,
           transparency: false,
           icon: 'timeline',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/26'
         },
         {
           name: 'Railroad',
           id: 27,
           transparency: false,
           icon: 'timeline',
-          visible: true
+          visible: true,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/27'
         },
         {
           name: 'Major Roads',
           id: 28,
           transparency: false,
           icon: 'timeline',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/28'
         },
         {
           name: 'Interstate Mile Markers',
           id: 29,
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/29'
         },
         {
           name: 'Major Streets',
           id: 30,
           transparency: false,
           icon: 'timeline',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/30'
         },
         {
           name: 'Streets',
           id: 31,
           transparency: false,
           icon: 'timeline',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/31'
         },
         {
           name: 'Intersections',
-          id: 31,
+          id: 32,
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/32'
         }
       ]
     },
@@ -340,49 +405,63 @@ export default () => ({
           id: 66,
           transparency: false,
           icon: 'control_point',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/66'
         },
         {
           name: 'City Wards',
           id: 73,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/73'
         },
         {
           name: 'County Districts',
           id: 68,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/68'
         },
         {
           name: 'School District',
           id: 70,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/70'
         },
         {
           name: 'State House District',
           id: 71,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/71'
         },
         {
           name: 'State Senate District',
           id: 72,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/72'
         },
         {
           name: 'Congressional District',
           id: 67,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/67'
         }
       ]
     },
@@ -394,28 +473,36 @@ export default () => ({
           id: 75,
           transparency: false,
           icon: 'control_point',
-          visible: true
+          visible: true,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/75'
         },
         {
           name: 'Colleges',
           id: 76,
           transparency: false,
           icon: 'control_point',
-          visible: true
+          visible: true,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/76'
         },
         {
           name: 'Elementary School Boundary',
           id: 77,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/77'
         },
         {
           name: 'Middle and High School Boundary',
           id: 78,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/78'
         }
       ]
     },
@@ -427,49 +514,63 @@ export default () => ({
           id: 82,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/82'
         },
         {
           name: 'Two Rivers Districts',
           id: 95,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/95'
         },
         {
           name: 'Clarksville Boundary',
           id: 96,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/96'
         },
         {
           name: 'CDBG Neighborhood',
           id: 97,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/97'
         },
         {
           name: 'Ft Campbell Boundary',
           id: 98,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/98'
         },
         {
           name: 'Zip Codes',
           id: 99,
           transparency: true,
           icon: 'border_all',
-          visible: false
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/99'
         },
         {
           name: 'County Boundary',
           id: 100,
           transparency: true,
           icon: 'border_all',
-          visible: true
+          visible: true,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/100'
         }
       ]
     },
@@ -522,6 +623,99 @@ export default () => ({
           icon: 'satellite',
           url:
             'https://tnmap.tn.gov/arcgis/rest/services/BASEMAPS/IMAGERY/MapServer',
+          visible: false
+        }
+      ]
+    },
+    {
+      heading: 'Zoom',
+      layers: [
+        {
+          id: '0',
+          name: 'Polling Zoom',
+          icon: 'control_point',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/0',
+          visible: false
+        },
+        {
+          id: '1',
+          name: 'School Zoom',
+          icon: 'control_point',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/1',
+          visible: false
+        },
+        {
+          id: '2',
+          name: 'College Zoom',
+          icon: 'control_point',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/2',
+          visible: false
+        },
+        {
+          id: '3',
+          name: 'Street Zoom',
+          icon: 'timeline',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/3',
+          visible: false
+        },
+        {
+          id: '4',
+          name: 'Park Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/4',
+          visible: false
+        },
+        {
+          id: '5',
+          name: 'Parcel Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/5',
+          visible: false
+        },
+        {
+          id: '6',
+          name: 'District Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/6',
+          visible: false
+        },
+        {
+          id: '7',
+          name: 'ward Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/7',
+          visible: false
+        },
+        {
+          id: '8',
+          name: 'Elementary Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/8',
+          visible: false
+        },
+        {
+          id: '9',
+          name: 'Middle High Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/9',
+          visible: false
+        },
+        {
+          id: '10',
+          name: 'County Zoom',
+          icon: 'border_all',
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/10',
           visible: false
         }
       ]

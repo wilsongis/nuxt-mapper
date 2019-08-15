@@ -16,5 +16,26 @@ export default {
   },
   setSelectedTool(state, value) {
     state.selectedTool = value
+  },
+  setSearchInfo(state, value) {
+    let returnValue = []
+    switch (value) {
+      case 'Owner':
+        returnValue = ['Parcels', 'Parcel Zoom', 'owner']
+        break
+      case 'Property Address':
+        returnValue = ['Parcels', 'Parcel Zoom', 'propertyad']
+        break
+      case 'Subdivision':
+        returnValue = ['Parcels', 'Parcel Zoom', 'subdivisio']
+        break
+      case 'Street':
+        returnValue = ['Streets', 'Street Zoom', 'label']
+        break
+      default:
+        returnValue = ['Parcels', 'Parcel Zoom', 'owner']
+        break
+    }
+    state.searchInfo = returnValue
   }
 }

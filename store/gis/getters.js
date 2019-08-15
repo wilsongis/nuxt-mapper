@@ -26,5 +26,8 @@ export default {
   },
   getParcelPopup(state) {
     return state.parcelPopup
+  },
+  getSearchInfo(state) {
+    return state.searchInfo
   }
 }
