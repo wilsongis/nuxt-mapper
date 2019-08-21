@@ -198,6 +198,37 @@ export default {
               })
           } // End layerTransparency
 
+          // Function to toggle map Labels on/off
+          const labelLayer = function(layerInfo) {
+            let i
+            const layerName = layerInfo[0]
+            const label = layerInfo[1]
+            const labelClass = {
+              // autocasts as new LabelClass()
+              symbol: {
+                type: 'text', // autocasts as new TextSymbol()
+                color: 'black',
+                haloColor: 'white',
+                haloSize: 1,
+                font: {
+                  // autocast as new Font()
+                  family: 'Playfair Display',
+                  size: 12,
+                  weight: 'bold'
+                }
+              },
+              labelPlacement: 'above-center',
+              labelExpressionInfo: {
+                expression: '$feature.' + label
+              }
+            }
+            for (i = 0; i < mapLayers.length; i++) {
+              if (mapLayers[i].id === layerName) {
+                mapLayers[i].labelingInfo = [labelClass]
+              }
+            }
+          } // End labelLayer
+
           // Function to toggle map layers on/off
           const toggleLayer = function(layerName) {
             let i
@@ -219,6 +250,9 @@ export default {
                 break
               case 'gis/setLayerTransparency':
                 layerTransparency(mutation.payload)
+                break
+              case 'gis/setLayerLabel':
+                labelLayer(mutation.payload)
                 break
             }
           }) // End of Subscribe

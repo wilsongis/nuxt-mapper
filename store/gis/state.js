@@ -15,6 +15,7 @@ export default () => ({
   layerCount: 53,
   layersList: [],
   layerToggle: null,
+  layerLabel: [],
   zoomFeature: [],
   searchInfo: [],
   selectedTool: 'Identify',
@@ -211,6 +212,7 @@ export default () => ({
           id: 37,
           transparency: true,
           icon: 'border_all',
+          label: 'owner',
           visible: true,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37'

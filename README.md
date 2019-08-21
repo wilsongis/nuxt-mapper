@@ -26,3 +26,5 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+## Project ToDo List: See [Project Board](https://github.com/wilsongis/nuxt-mapper/projects/1)

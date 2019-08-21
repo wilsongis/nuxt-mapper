@@ -20,62 +20,83 @@
             :key="defaultLayers[head].layers[layer].name"
             four-line
           >
-            <v-list-item-icon>
-              <v-icon
-                v-if="
-                  defaultLayers[head].layers[layer].icon === 'control_point'
-                "
-                id="icon"
-                >control_point</v-icon
-              >
-              <v-icon
-                v-else-if="
-                  defaultLayers[head].layers[layer].icon === 'timeline'
-                "
-                id="icon"
-                >timeline</v-icon
-              >
-              <v-icon
-                v-else-if="
-                  defaultLayers[head].layers[layer].icon === 'border_all'
-                "
-                id="icon"
-                >border_all</v-icon
-              >
-              <v-icon
-                v-else-if="
-                  defaultLayers[head].layers[layer].icon === 'satellite'
-                "
-                id="icon"
-                >satellite</v-icon
-              >
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-switch
-                :key="defaultLayers[head].layers[layer].name"
-                :v-model="`switch-${layer}`"
-                color="primary"
-                :label="defaultLayers[head].layers[layer].name"
-                :value="true"
-                :input-value="defaultLayers[head].layers[layer].visible"
-                @change="toggle(head, layer, $event !== null, $event)"
-              ></v-switch>
+            <v-card outlined tile width="350">
+              <v-row no-gutters>
+                <v-list-item-icon>
+                  <v-icon
+                    v-if="
+                      defaultLayers[head].layers[layer].icon === 'control_point'
+                    "
+                    id="icon"
+                    >mdi-adjust</v-icon
+                  >
+                  <v-icon
+                    v-else-if="
+                      defaultLayers[head].layers[layer].icon === 'timeline'
+                    "
+                    id="icon"
+                    >timeline</v-icon
+                  >
+                  <v-icon
+                    v-else-if="
+                      defaultLayers[head].layers[layer].icon === 'border_all'
+                    "
+                    id="icon"
+                    >border_all</v-icon
+                  >
+                  <v-icon
+                    v-else-if="
+                      defaultLayers[head].layers[layer].icon === 'satellite'
+                    "
+                    id="icon"
+                    >satellite</v-icon
+                  >
+                </v-list-item-icon>
 
-              <v-slider
-                v-if="defaultLayers[head].layers[layer].transparency === true"
-                :v-model="`slide-${layer}`"
-                thumb-label
-                append-icon="layers"
-                prepend-icon="mdi-layers-outline"
-                value="100"
-                :max="max"
-                :min="min"
-                @change="transparency(head, layer, $event !== null, $event)"
-              ></v-slider>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item>
-            <v-divider></v-divider>
+                <v-switch
+                  :key="defaultLayers[head].layers[layer].name"
+                  :v-model="`switch-${layer}`"
+                  color="primary"
+                  :label="defaultLayers[head].layers[layer].name"
+                  :value="true"
+                  :input-value="defaultLayers[head].layers[layer].visible"
+                  @change="toggle(head, layer, $event !== null, $event)"
+                ></v-switch>
+              </v-row>
+              <v-row no-gutters>
+                <v-col cols="6">
+                  <v-checkbox
+                    v-if="defaultLayers[head].layers[layer].label !== undefined"
+                    :key="defaultLayers[head].layers[layer].name"
+                    :v-model="`check-${layer}`"
+                    color="primary"
+                    label="Label"
+                    @change="layerLabel(head, layer, $event !== null, $event)"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="6">
+                  <v-combobox
+                    v-model="select"
+                    :items="items"
+                    chips
+                    label="I use chips"
+                  ></v-combobox>
+                </v-col>
+              </v-row>
+              <v-row no-gutters>
+                <v-slider
+                  v-if="defaultLayers[head].layers[layer].transparency === true"
+                  :v-model="`slide-${layer}`"
+                  thumb-label
+                  append-icon="layers"
+                  prepend-icon="mdi-layers-outline"
+                  value="100"
+                  :max="max"
+                  :min="min"
+                  @change="transparency(head, layer, $event !== null, $event)"
+                ></v-slider>
+              </v-row>
+            </v-card>
           </v-list-item>
         </v-list-item-group>
       </v-list-group>
@@ -88,6 +109,8 @@ export default {
   data: () => ({
     visible: false,
     expanded: false,
+    checkbox: true,
+    checkIcon: 'mdi-label',
     panel: [],
     settings: [],
     items: 8,
@@ -107,7 +130,11 @@ export default {
     })
   },
   methods: {
-    layerClick() {},
+    layerLabel(head, layer, value, event) {
+      const layerName = this.defaultLayers[head].layers[layer].name
+      const layerLabel = this.defaultLayers[head].layers[layer].label
+      this.$store.commit('gis/setLayerLabel', [layerName, layerLabel])
+    },
     complete() {},
     ...mapActions({
       setDrawerRight: 'app/setDrawerRight'
@@ -139,7 +166,16 @@ export default {
 }
 </script>
 <style>
-#icon {
-  padding-top: 15px;
+.v-list-item__icon {
+  margin: 0px 0;
+}
+
+#labelcheck {
+  padding-left: 50px;
+  margin-top: 0px;
+}
+.v-input--selection-controls {
+  margin-top: 0px;
+  padding-top: 4px;
 }
 </style>

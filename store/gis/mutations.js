@@ -11,6 +11,9 @@ export default {
   setLayerToggle(state, value) {
     state.layerToggle = value
   },
+  setLayerLabel(state, value) {
+    state.layerLabel = value
+  },
   setZoomFeature(state, value) {
     state.zoomFeature = value
   },
