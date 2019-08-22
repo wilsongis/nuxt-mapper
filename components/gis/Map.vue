@@ -213,7 +213,7 @@ export default {
                 font: {
                   // autocast as new Font()
                   family: 'Playfair Display',
-                  size: 12,
+                  size: 10,
                   weight: 'bold'
                 }
               },

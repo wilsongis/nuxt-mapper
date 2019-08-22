@@ -126,10 +126,8 @@ export default {
   },
   methods: {
     layerLabel(head, layer, value, event) {
-      // eslint-disable-next-line no-console
-      console.log(this.cbValue)
       const layerName = this.defaultLayers[head].layers[layer].name
-      const layerLabel = this.defaultLayers[head].layers[layer].label
+      const layerLabel = this.defaultLayers[head].layers[layer].labels
       this.$store.commit('gis/setLayerLabel', [layerName, layerLabel])
     },
     complete() {},

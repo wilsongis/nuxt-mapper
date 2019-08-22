@@ -212,8 +212,7 @@ export default () => ({
           id: 37,
           transparency: true,
           icon: 'Polygon',
-          labels: ['owner', 'propertyad'],
-          visible: true,
+          labels: 'owner',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37'
         },
