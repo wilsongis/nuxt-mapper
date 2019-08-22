@@ -6,19 +6,15 @@
     color="blue darken-3"
     dark
   >
-    <v-tooltip left>
-      <template v-slot:activator="{ on }">
-        <v-btn
-          class="default v-btn--simple"
-          dark
-          icon
-          @click.stop="onClickLeft"
-        >
-          <v-icon>mdi-crosshairs-gps</v-icon>
-        </v-btn>
-      </template>
-      <span>Near Me</span>
-    </v-tooltip>
+    <v-btn
+      v-tooltip="'Near Me'"
+      class="default v-btn--simple"
+      dark
+      icon
+      @click.stop="onClickLeft"
+    >
+      <v-icon>mdi-crosshairs-gps</v-icon>
+    </v-btn>
 
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
       <span class="hidden-sm-and-down">Toolbar</span>
@@ -26,6 +22,7 @@
     <div id="fieldSelect">
       <v-select
         v-model="pick"
+        v-tooltip="'Field to Search'"
         :items="items"
         label="Search Field"
         outlined
@@ -50,19 +47,16 @@
     </vue-bootstrap-typeahead>
 
     <v-spacer></v-spacer>
-    <v-tooltip right>
-      <template v-slot:activator="{ on }">
-        <v-btn
-          class="default v-btn--simple"
-          dark
-          icon
-          @click.stop="onClickRight"
-        >
-          <v-icon>mdi-layers-outline</v-icon>
-        </v-btn>
-      </template>
-      <span>Table of Contents</span>
-    </v-tooltip>
+
+    <v-btn
+      v-tooltip="'Table of Contents'"
+      class="default v-btn--simple"
+      dark
+      icon
+      @click.stop="onClickRight"
+    >
+      <v-icon>mdi-layers-outline</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 <script>
