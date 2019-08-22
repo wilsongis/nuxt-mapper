@@ -128,7 +128,7 @@ export default {
     layerLabel(head, layer, value, event) {
       const layerName = this.defaultLayers[head].layers[layer].name
       const layerLabel = this.defaultLayers[head].layers[layer].labels
-      this.$store.commit('gis/setLayerLabel', [layerName, layerLabel])
+      this.$store.commit('gis/setLayerLabel', [layerName, layerLabel, event])
     },
     complete() {},
     ...mapActions({

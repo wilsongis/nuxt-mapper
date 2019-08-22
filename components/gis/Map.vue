@@ -172,7 +172,6 @@ export default {
           } // End zoom2Feature
 
           const layerTransparency = function(layerInfo) {
-            // eslint-disable-next-line no-unused-vars
             const layerName = layerInfo[0]
             const transparency = layerInfo[1]
             let i, layer
@@ -201,25 +200,29 @@ export default {
           // Function to toggle map Labels on/off
           const labelLayer = function(layerInfo) {
             let i
+            let labelClass = {}
             const layerName = layerInfo[0]
             const label = layerInfo[1]
-            const labelClass = {
-              // autocasts as new LabelClass()
-              symbol: {
-                type: 'text', // autocasts as new TextSymbol()
-                color: 'black',
-                haloColor: 'white',
-                haloSize: 1,
-                font: {
-                  // autocast as new Font()
-                  family: 'Playfair Display',
-                  size: 10,
-                  weight: 'bold'
+            const labelOnOff = layerInfo[2]
+            if (labelOnOff) {
+              labelClass = {
+                // autocasts as new LabelClass()
+                symbol: {
+                  type: 'text', // autocasts as new TextSymbol()
+                  color: 'black',
+                  haloColor: 'white',
+                  haloSize: 1,
+                  font: {
+                    // autocast as new Font()
+                    family: 'Playfair Display',
+                    size: 10,
+                    weight: 'bold'
+                  }
+                },
+                labelPlacement: 'above-center',
+                labelExpressionInfo: {
+                  expression: '$feature.' + label
                 }
-              },
-              labelPlacement: 'above-center',
-              labelExpressionInfo: {
-                expression: '$feature.' + label
               }
             }
             for (i = 0; i < mapLayers.length; i++) {
