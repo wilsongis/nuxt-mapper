@@ -5,58 +5,61 @@
     app
     color="blue darken-3"
     dark
+    short
   >
-    <v-btn
-      v-tooltip="'Near Me'"
-      class="default v-btn--simple"
-      dark
-      icon
-      @click.stop="onClickLeft"
-    >
-      <v-icon>mdi-crosshairs-gps</v-icon>
-    </v-btn>
+    <v-row align="center" no-gutters>
+      <v-btn
+        v-tooltip="'Near Me'"
+        class="default v-btn--simple"
+        dark
+        icon
+        @click.stop="onClickLeft"
+      >
+        <v-icon>mdi-crosshairs-gps</v-icon>
+      </v-btn>
 
-    <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-      <span class="hidden-sm-and-down">Toolbar</span>
-    </v-toolbar-title>
-    <div id="fieldSelect">
-      <v-select
-        v-model="pick"
-        v-tooltip="'Field to Search'"
-        :items="items"
-        label="Search Field"
-        outlined
-        flat
-        solo-inverted
-        hide-details
-        class="hidden-sm-and-down"
-      ></v-select>
-    </div>
-    <v-icon>search</v-icon>
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+        <span class="hidden-sm-and-down">CMC GIS Viewer</span>
+      </v-toolbar-title>
+      <div id="fieldSelect">
+        <v-select
+          v-model="pick"
+          v-tooltip="'Field to Search'"
+          :items="items"
+          label="Search Field"
+          outlined
+          flat
+          solo-inverted
+          hide-details
+          class="hidden-sm-and-down"
+        ></v-select>
+      </div>
+      <v-icon>search</v-icon>
 
-    <vue-bootstrap-typeahead
-      v-model="query"
-      class="mb-2"
-      background-variant="bg-white"
-      size="lg"
-      :data="features"
-      :serializer="item => item.name"
-      placeholder="Search Features"
-      @hit="selectedFeature = $event"
-    >
-    </vue-bootstrap-typeahead>
+      <vue-bootstrap-typeahead
+        v-model="query"
+        class="mb-2"
+        background-variant="bg-white"
+        size="lg"
+        :data="features"
+        :serializer="item => item.name"
+        placeholder="Search Features"
+        @hit="selectedFeature = $event"
+      >
+      </vue-bootstrap-typeahead>
 
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-    <v-btn
-      v-tooltip="'Table of Contents'"
-      class="default v-btn--simple"
-      dark
-      icon
-      @click.stop="onClickRight"
-    >
-      <v-icon>mdi-layers-outline</v-icon>
-    </v-btn>
+      <v-btn
+        v-tooltip="'Table of Contents'"
+        class="default v-btn--simple"
+        dark
+        icon
+        @click.stop="onClickRight"
+      >
+        <v-icon>mdi-layers-outline</v-icon>
+      </v-btn>
+    </v-row>
   </v-app-bar>
 </template>
 <script>
@@ -192,6 +195,7 @@ export default {
   padding-left: 0px;
   max-width: 195px;
 }
+
 .form-control {
   width: 450px;
   height: 60px;
