@@ -69,44 +69,6 @@ export default () => ({
       num: 10
     }
   ],
-  nearmeLayers: [
-    {
-      nearmeName: 'owner',
-      layerName: 'Parcels',
-      url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
-      displayFields: ['owner', 'owner2', 'propertyad', 'gislink'],
-      outFields: ['*'],
-      orderByFields: ['owner'],
-      pre: '',
-      post: '%',
-      num: 10
-    },
-    {
-      nearmeName: 'propertyad',
-      layerName: 'Parcels',
-      url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/37/',
-      displayFields: ['propertyad', 'owner', 'owner2', 'gislink'],
-      outFields: ['*'],
-      orderByFields: ['propertyad'],
-      pre: '%',
-      post: '%',
-      num: 5
-    },
-    {
-      nearmeName: 'label',
-      layerName: 'Streets',
-      url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/31/',
-      displayFields: ['label', 'name', 'alt_name', 'type'],
-      outFields: ['*'],
-      orderByFields: ['label'],
-      pre: '',
-      post: '%',
-      num: 5
-    }
-  ],
   // Array of Layers loaded into the map
   defaultLayers: [
     {
@@ -117,6 +79,7 @@ export default () => ({
           name: 'Landfill',
           transparency: false,
           icon: 'Point',
+          labels: 'name',
           visible: false,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/16'
@@ -127,6 +90,7 @@ export default () => ({
           icon: 'Point',
           transparency: false,
           visible: false,
+          labels: 'prop_name',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/17'
         },
@@ -144,6 +108,7 @@ export default () => ({
           name: 'City Offices',
           transparency: false,
           icon: 'Point',
+          labels: 'office',
           visible: false,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/19'
@@ -153,6 +118,7 @@ export default () => ({
           name: 'County Offices',
           transparency: false,
           icon: 'Point',
+          labels: 'office',
           visible: false,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/20'
@@ -171,9 +137,20 @@ export default () => ({
           name: 'Post Offices',
           transparency: false,
           icon: 'Point',
+          labels: 'poname',
           visible: false,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/22'
+        },
+        {
+          name: 'Parks',
+          id: 43,
+          transparency: true,
+          icon: 'Polygon',
+          labels: 'name',
+          visible: false,
+          url:
+            'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/43'
         }
       ]
     },
@@ -185,6 +162,7 @@ export default () => ({
           id: 34,
           transparency: true,
           icon: 'Polygon',
+          labels: 'name',
           visible: false,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/34'
@@ -194,6 +172,7 @@ export default () => ({
           id: 35,
           transparency: false,
           icon: 'Point',
+          labels: 'label',
           visible: false,
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/35'
@@ -222,6 +201,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'sub',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/38'
         },
@@ -240,6 +220,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'tile_name',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/40'
         },
@@ -249,6 +230,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'tile_name',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/41'
         }
@@ -263,6 +245,7 @@ export default () => ({
           transparency: false,
           icon: 'Line',
           visible: false,
+          labels: 'name',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/51'
         },
@@ -289,6 +272,7 @@ export default () => ({
           transparency: false,
           icon: 'Point',
           visible: false,
+          labels: 'mile_marke',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/54'
         },
@@ -307,6 +291,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'musym',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/56'
         },
@@ -316,6 +301,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'wetland_ty',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/57'
         },
@@ -325,6 +311,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'fld_zone',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/46'
         }
@@ -348,6 +335,7 @@ export default () => ({
           transparency: false,
           icon: 'Line',
           visible: true,
+          labels: 'name',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/27'
         },
@@ -357,6 +345,7 @@ export default () => ({
           transparency: false,
           icon: 'Line',
           visible: false,
+          labels: 'label',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/28'
         },
@@ -366,6 +355,7 @@ export default () => ({
           transparency: false,
           icon: 'Point',
           visible: false,
+          labels: 'marker',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/29'
         },
@@ -375,6 +365,7 @@ export default () => ({
           transparency: false,
           icon: 'Line',
           visible: false,
+          labels: 'label',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/30'
         },
@@ -384,6 +375,7 @@ export default () => ({
           transparency: false,
           icon: 'Line',
           visible: false,
+          labels: 'label',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/31'
         },
@@ -393,6 +385,7 @@ export default () => ({
           transparency: false,
           icon: 'Point',
           visible: false,
+          labels: 'label',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/32'
         }
@@ -407,6 +400,7 @@ export default () => ({
           transparency: false,
           icon: 'Point',
           visible: false,
+          labels: 'district',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/66'
         },
@@ -416,6 +410,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'district',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/73'
         },
@@ -425,6 +420,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'district',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/68'
         },
@@ -475,6 +471,7 @@ export default () => ({
           transparency: false,
           icon: 'Point',
           visible: true,
+          labels: 'school_nam',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/75'
         },
@@ -484,6 +481,7 @@ export default () => ({
           transparency: false,
           icon: 'Point',
           visible: true,
+          labels: 'owner2',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/76'
         },
@@ -493,6 +491,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'school',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/77'
         },
@@ -502,6 +501,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'school',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/78'
         }
@@ -516,6 +516,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'zoning',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/82'
         },
@@ -561,6 +562,7 @@ export default () => ({
           transparency: true,
           icon: 'Polygon',
           visible: false,
+          labels: 'zip',
           url:
             'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Layers/MapServer/99'
         },
