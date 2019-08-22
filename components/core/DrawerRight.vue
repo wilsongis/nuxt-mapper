@@ -3,6 +3,7 @@
     <v-list flat>
       <v-list-group
         v-for="(heading, head) in defaultLayers"
+        v-show="defaultLayers[head].heading !== 'Zoom'"
         :key="defaultLayers[head].heading"
         no-action
       >

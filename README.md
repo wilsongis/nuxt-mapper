@@ -1,6 +1,6 @@
 # nuxt-mapper
 
-> An ArcGIS API for JavaScript 4 and Nuxt Project
+> An ArcGIS API for JavaScript 4.x and Nuxt Project
 
 ## Build Setup with Docker
 
@@ -25,6 +25,14 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## My Development Workflow
+
+### Branches
+
+- Master - The Master Branch only contained working code
+- Original - Contains the basic working map before I started customizing
+- All other branches - I do a new branch for each fix/enhancement
 
 ## Project ToDo List: See [Project Board](https://github.com/wilsongis/nuxt-mapper/projects/1)
+
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
