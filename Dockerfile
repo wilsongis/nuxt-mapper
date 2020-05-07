@@ -3,7 +3,7 @@ FROM node:alpine
 ENV MAIN_PATH=/usr/local/bin/nuxt-mapper/
 
 # update and install dependency
-RUN apk update && apk upgrade && apk add git wget bash zsh && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+RUN apk update && apk upgrade && apk add python make g++ git wget bash zsh && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 
 # Set up Project
