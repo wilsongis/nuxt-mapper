@@ -6,18 +6,8 @@
     color="blue darken-3"
     dark
   >
-    <v-btn
-      v-tooltip="'Near Me'"
-      class="default v-btn--simple"
-      dark
-      icon
-      @click.stop="onClickLeft"
-    >
-      <v-icon>mdi-crosshairs-gps</v-icon>
-    </v-btn>
-
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-      <span class="hidden-sm-and-down">Toolbar</span>
+      <span class="hidden-sm-and-down"></span>
     </v-toolbar-title>
     <div id="fieldSelect">
       <v-select
@@ -36,13 +26,13 @@
 
     <vue-bootstrap-typeahead
       v-model="query"
+      :data="features"
+      :serializer="item => item.name"
+      @hit="selectedFeature = $event"
       class="mb-2"
       background-variant="bg-white"
       size="lg"
-      :data="features"
-      :serializer="item => item.name"
       placeholder="Search Features"
-      @hit="selectedFeature = $event"
     >
     </vue-bootstrap-typeahead>
 
@@ -50,10 +40,10 @@
 
     <v-btn
       v-tooltip="'Table of Contents'"
+      @click.stop="onClickRight"
       class="default v-btn--simple"
       dark
       icon
-      @click.stop="onClickRight"
     >
       <v-icon>mdi-layers-outline</v-icon>
     </v-btn>

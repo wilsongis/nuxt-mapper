@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app clipped>
+  <v-navigation-drawer v-model="drawer" app clipped permanent="true">
     <div id="nearme">
       <h1>Near Me:</h1>
       <h3>Click on a point on the map.</h3>
