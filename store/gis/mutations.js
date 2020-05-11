@@ -32,9 +32,6 @@ export default {
       case 'Subdivision':
         returnValue = ['Parcels', 'Parcel Zoom', 'subdivisio']
         break
-      case 'Street':
-        returnValue = ['Streets', 'Street Zoom', 'label']
-        break
       default:
         returnValue = ['Parcels', 'Parcel Zoom', 'owner']
         break

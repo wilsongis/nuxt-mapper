@@ -55,18 +55,6 @@ export default () => ({
       pre: '%27%25',
       post: '%25%27',
       num: 10
-    },
-    {
-      searchName: 'label',
-      layerName: 'Streets',
-      url:
-        'http://apnsgis1.apsu.edu:6080/arcgis/rest/services/CommunityMaps/CMC_Zoom/MapServer/3/',
-      displayFields: ['label', 'name', 'alt_name', 'type'],
-      outFields: 'objectid, label, name, alt_name, type',
-      orderByFields: 'label',
-      pre: '%27%25',
-      post: '%25%27',
-      num: 10
     }
   ],
   // Array of Layers loaded into the map

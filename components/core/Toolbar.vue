@@ -69,7 +69,7 @@ export default {
       displayFeature: null,
       features: [],
       pick: 'Owner',
-      items: ['Owner', 'Property Address', 'Subdivision', 'Street'],
+      items: ['Owner', 'Property Address', 'Subdivision'],
       returnValue: {}
     }
   },
@@ -114,31 +114,20 @@ export default {
           layer2Search = layers[i]
         }
       }
-      if (layer2Search.layerName === 'Streets') {
-        const str = newQuery.toLowerCase().split(' ')
-        for (let i = 0; i < str.length; i++) {
-          str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1)
-        }
-        strSearch =
-          layerId[2] +
-          '+like+' +
-          layer2Search.pre +
-          str.join(' ') +
-          layer2Search.post
-      } else {
-        strSearch =
-          layerId[2] +
-          '+like+' +
-          layer2Search.pre +
-          newQuery.toUpperCase() +
-          layer2Search.post // eslint-disable-next-line no-console
-      }
+
+      strSearch =
+        layerId[2] +
+        '+like+' +
+        layer2Search.pre +
+        newQuery.toUpperCase() +
+        layer2Search.post
       const outFields = layer2Search.outFields
       const orderByFields = layer2Search.orderByFields
       const searchName = layer2Search.searchName
+      const listCount = 5
       const url =
         layer2Search.url +
-        `query?where=${strSearch}&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=${outFields}&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=${orderByFields}&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=10&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=json`
+        `query?where=${strSearch}&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=${outFields}&returnGeometry=false&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=${orderByFields}&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=${listCount}&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=json`
       axios.get(url).then(res => {
         searchCapture = res.data.features
         let x = 0
@@ -148,6 +137,8 @@ export default {
             name: searchCapture[x].attributes[searchName],
             layername: layerId[1]
           }
+          // eslint-disable-next-line no-console
+          console.log(singleArray)
           searchResults.push(singleArray)
         }
         this.features = searchResults
