@@ -26,29 +26,29 @@
                 <v-col cols="2">
                   <v-list-item-icon>
                     <v-icon
-                      v-if="defaultLayers[head].layers[layer].icon === 'Point'"
                       id="icon"
+                      v-if="defaultLayers[head].layers[layer].icon === 'Point'"
                       >mdi-adjust</v-icon
                     >
                     <v-icon
+                      id="icon"
                       v-else-if="
                         defaultLayers[head].layers[layer].icon === 'Line'
                       "
-                      id="icon"
                       >timeline</v-icon
                     >
                     <v-icon
+                      id="icon"
                       v-else-if="
                         defaultLayers[head].layers[layer].icon === 'Polygon'
                       "
-                      id="icon"
                       >border_all</v-icon
                     >
                     <v-icon
+                      id="icon"
                       v-else-if="
                         defaultLayers[head].layers[layer].icon === 'Image'
                       "
-                      id="icon"
                       >satellite</v-icon
                     >
                   </v-list-item-icon>
@@ -57,11 +57,11 @@
                   <v-switch
                     :key="defaultLayers[head].layers[layer].name"
                     :v-model="`switch-${layer}`"
-                    color="primary"
                     :label="defaultLayers[head].layers[layer].name"
                     :value="true"
                     :input-value="defaultLayers[head].layers[layer].visible"
                     @change="toggle(head, layer, $event !== null, $event)"
+                    color="primary"
                   ></v-switch>
                 </v-col>
                 <v-col cols="4">
@@ -72,9 +72,9 @@
                     :key="defaultLayers[head].layers[layer].name"
                     v-tooltip="'Toogle Labels'"
                     :v-model="`check-${layer}`"
+                    @change="layerLabel(head, layer, $event !== null, $event)"
                     color="primary"
                     append-icon="mdi-label"
-                    @change="layerLabel(head, layer, $event !== null, $event)"
                   ></v-checkbox>
                 </v-col>
               </v-row>
@@ -82,13 +82,13 @@
                 <v-slider
                   v-if="defaultLayers[head].layers[layer].transparency === true"
                   :v-model="`slide-${layer}`"
+                  :max="max"
+                  :min="min"
+                  @change="transparency(head, layer, $event !== null, $event)"
                   thumb-label
                   append-icon="layers"
                   prepend-icon="mdi-layers-outline"
                   value="100"
-                  :max="max"
-                  :min="min"
-                  @change="transparency(head, layer, $event !== null, $event)"
                 ></v-slider>
               </v-row>
             </v-card>
