@@ -1,6 +1,6 @@
 export default {
-  setDrawer({ commit }, drawer) {
-    commit('SET_DRAWER', drawer)
+  setDrawerLeft({ commit }, drawerLeft) {
+    commit('SET_DRAWER', drawerLeft)
   },
   setDrawerRight({ commit }, drawerRight) {
     commit('SET_DRAWERRIGHT', drawerRight)

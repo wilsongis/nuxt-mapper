@@ -2,7 +2,7 @@
   <v-app>
     <Toolbar />
 
-    <Drawer />
+    <DrawerLeft />
 
     <DrawerRight />
     <Content />
@@ -12,14 +12,14 @@
 
 <script>
 import Toolbar from '~/components/core/Toolbar'
-import Drawer from '~/components/core/Drawer'
+import DrawerLeft from '~/components/core/DrawerLeft'
 import DrawerRight from '~/components/core/DrawerRight'
 import Content from '~/components/core/Content'
 import Footer from '~/components/core/Footer'
 export default {
   components: {
     Toolbar,
-    Drawer,
+    DrawerLeft,
     DrawerRight,
     Content,
     Footer

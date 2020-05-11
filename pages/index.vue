@@ -20,7 +20,7 @@ export default {
     source: String
   },
   data: () => ({
-    drawer: false,
+    drawerLeft: false,
     drawerRight: false,
     right: false,
     left: false

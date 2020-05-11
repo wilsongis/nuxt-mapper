@@ -1,6 +1,6 @@
 export default {
-  getDrawer(state) {
-    return state.drawer
+  getDrawerLeft(state) {
+    return state.drawerLeft
   },
   getDrawerRight(state) {
     return state.drawerRight

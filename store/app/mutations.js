@@ -1,6 +1,6 @@
 export default {
-  SET_DRAWER(state, drawer) {
-    state.drawer = drawer
+  SET_DRAWERLEFT(state, drawerLeft) {
+    state.drawerLeft = drawerLeft
   },
   SET_DRAWERRIGHT(state, drawerRight) {
     state.drawerRight = drawerRight

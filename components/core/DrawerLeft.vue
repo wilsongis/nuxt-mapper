@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app clipped permanent>
+  <v-navigation-drawer v-model="drawerLeft" app clipped permanent>
     <div id="nearme">
       <h1>Near Me:</h1>
       <h3>Click on a point on the map.</h3>
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      drawer: 'app/getDrawer',
+      drawerLeft: 'app/getDrawerLeft',
       nearmePoint: 'nearme/getNearMePoint',
       nearmeLayers: 'nearme/getNearMeLayers'
     })

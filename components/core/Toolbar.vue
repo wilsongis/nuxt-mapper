@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      drawer: 'app/getDrawer',
+      drawer: 'app/getDrawerLeft',
       drawerRight: 'app/getDrawerRight',
       zoomFeature: 'gis/getZoomFeature',
       searchInfo: 'gis/getSearchInfo',

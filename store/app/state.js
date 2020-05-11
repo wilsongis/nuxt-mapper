@@ -1,5 +1,5 @@
 export default () => ({
-  drawer: false,
+  drawerLeft: false,
   drawerRight: false,
   right: false,
   left: false
