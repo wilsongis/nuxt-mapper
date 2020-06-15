@@ -19,6 +19,8 @@
     "@nuxtjs/vuetify": "^1.11.2",
     "cross-env": "^7.0.2",
     "esri-loader": "^2.14.0",
+    "fibers": "^5.0.0",
+    "jshint": "^2.11.1",
     "nuxt": "^2.12.2",
     "vue-bootstrap-typeahead": "^0.2.6",
     "vue-directive-tooltip": "^1.6.3"
